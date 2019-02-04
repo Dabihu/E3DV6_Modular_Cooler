@@ -45,7 +45,8 @@ hole_z = 34;
 hole_d = 2.9;
 hole_wall = 1.2;
 hole_depth = 5;
-rod_dia = 3;
+hole_punching = 10;
+rod_dia = hole_d+2*hole_wall;
 x_rod_angle = 45;
 y_rod_angle = 20;
 rod_length = 20;
@@ -403,12 +404,11 @@ module rod_holder() {
 					cylinder(r=hole_r,h=hole_depth);
 					translate([0,0,hole_depth])
 						sphere(r=hole_r);
-					translate([0,0,hole_depth+hole_r/2])
+					translate([0,0,hole_depth])
 						rotate([-x_rod_angle,y_rod_angle,0])
-							translate([0,0,-hole_r/2])
-								cylinder(r=rod_dia/2,h=rod_length);
+							cylinder(r=rod_dia/2,h=rod_length);
 				}
-				cylinder(r=hole_d/2,h=hole_depth,$fn=16);
+				cylinder(r=hole_d/2,h=hole_depth+hole_punching,$fn=16);
 			}
 		}
 }
